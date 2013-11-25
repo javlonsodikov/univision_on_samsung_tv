@@ -1,0 +1,16 @@
+#SceneUnivisionVideoPlayer {
+	position : absolute;
+	left : 0px;
+	top : 0px;
+	width : 1280px;
+	height : 720px;
+	background-color : #ffffff;
+	background-image : url('');
+}
+#SceneUnivisionVideoPlayer #videoPlayer{
+	position : absolute;
+	left : 0px;
+	top : 0px;
+	height : 720px;
+	width : 1280px;
+}
