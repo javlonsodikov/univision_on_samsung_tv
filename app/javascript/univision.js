@@ -94,6 +94,7 @@ Univision.login = function() {
 
 Univision.onLoginFailed = function() {
 	alert("login failed");
+	Univision.showError("LOGF");
 };
 
 Univision.onLoginSuccessful = function() {
@@ -118,6 +119,7 @@ Univision.onLoginSuccessful = function() {
 
 Univision.onSessionIdNotFound = function() {
 	alert("session id not found!");
+	Univision.showError("SESERR");
 };
 
 Univision.onSessionIdFound = function(sessionId) {
@@ -132,6 +134,17 @@ Univision.playCurrentChannel = function() {
 	var currentChannel = Univision.getCurrentChannel();
 	if (currentChannel != null) {
 		alert("video url: " + currentChannel.url);
+		Univision.showCurrentChannelName();
 		sf.service.VideoPlayer.play(Univision.getCurrentChannel());
+	} else {
+		Univision.showError("INVCH");
 	}
+};
+
+Univision.showCurrentChannelName() {
+	$("#channelName").text(Univision.CHANNEL_NAMES[this.currentChannelIndex]);
+}
+
+Univision.showError = function(error) {
+	$("#channelName").text(error);
 };

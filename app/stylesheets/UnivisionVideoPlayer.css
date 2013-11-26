@@ -7,10 +7,27 @@
 	background-color : #ffffff;
 	background-image : url('');
 }
-#SceneUnivisionVideoPlayer #videoPlayer{
+
+#SceneUnivisionVideoPlayer #videoPlayer {
 	position : absolute;
 	left : 0px;
 	top : 0px;
 	height : 720px;
 	width : 1280px;
+}
+
+#SceneUnivisionVideoPlayer #channelName {
+	z-index : 99;
+	position : absolute;
+	border-radius: 15px;
+	left : 20px;
+	top : 20px;
+	width : 100px;
+	height : 50px;
+	line-height : 50px;
+	text-align : center;
+	vertical-align: middle;
+	font-weight : bold;
+	color : black;
+	background-color : #555555;
 }

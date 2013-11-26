@@ -29,6 +29,8 @@ SceneUnivisionVideoPlayer.prototype.initialize = function () {
 		height:vHeight
 	});
 	sf.service.VideoPlayer.show();
+	// disable info bar
+	//$('#sf-service-videoplayer-mini-infobar').hide();
 	
 	Univision.login();
 };
