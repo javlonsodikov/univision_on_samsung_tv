@@ -3,9 +3,11 @@ var Univision = {
 };
 
 Univision.CHANNEL_NAMES = ["mnb", "mnb_2", " edu", "ubs", "mn25", "ntv", "tv5", "eagle", "sbn", "tv9", "sportbox", "etv", "mongolhd", "royal", "mnc", "ehoron", "bloomberg", "parliament"];
+Univision.AVAILABLE_BITRATES = [1200000, 750000, 500000];
 
 Univision.currentChannelIndex = 0;
 Univision.sessionId = null;
+Univision.currentBitrateIndex = 0;
 
 Univision.channelUp = function() {
 	this.currentChannelIndex += 1;
@@ -21,6 +23,12 @@ Univision.channelDown = function() {
 	}
 };
 
+Univision.setCurrentBitrateIndex = function(i) {
+	if (i >= 0 && i < Univision.AVAILABLE_BITRATES.length) {
+		this.currentBitrateIndex = i;
+	}
+};
+
 Univision.getCurrentChannel = function() {
 	if (this.sessionId == null) {
 		Univision.onSessionIdNotFound();
@@ -28,15 +36,26 @@ Univision.getCurrentChannel = function() {
 	}
 	var url = 'http://202.70.32.50/hls/_definst_/tv_mid/smil:'
 								+ Univision.CHANNEL_NAMES[this.currentChannelIndex]
-								+ '.smil/playlist.m3u8?' + this.sessionId + '|BITRATES=1200000|COMPONENT=HLS';
+								+ '.smil/playlist.m3u8?' + this.sessionId + '|BITRATES=' + Univision.AVAILABLE_BITRATES[this.currentBitrateIndex] + '|COMPONENT=HLS';
 	return { url: url, title: Univision.CHANNEL_NAMES[this.currentChannelIndex]};
 };
 
 Univision.logout = function() {
-	$.get("http://my.univision.mn/logout");
+	$.ajax({
+		url: "http://my.univision.mn/logout",
+		type: "get",
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert("logout error");
+			Univision.login();
+		},
+		success: function(data) {
+			alert("logout success");
+			Univision.login();
+		}
+	});
 };
 
-Univision.login = function(username, password) {
+Univision.login = function() {
 	$.ajax({
 		url: "http://my.univision.mn/index.php/login",
 		type: "get",
@@ -52,8 +71,8 @@ Univision.login = function(username, password) {
 					type: "post",
 					data: {
 						"signin[_csrf_token]": csrfToken,
-						"signin[username]": username,
-						"signin[password]": password,
+						"signin[username]": Account.USERNAME,
+						"signin[password]": Account.PASSWORD,
 						"submit": "Нэвтрэх"
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) {

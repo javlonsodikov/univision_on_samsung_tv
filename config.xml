@@ -16,9 +16,9 @@
 <ticker>n</ticker>
 <childlock>n</childlock>
 <audiomute itemtype="string">y</audiomute>
-	<videomute itemtype="string">y</videomute>
-	<dcont itemtype="string">y</dcont>
-	<movie itemtype="string">y</movie>
+<videomute itemtype="string">y</videomute>
+<dcont itemtype="string">y</dcont>
+<movie itemtype="string">y</movie>
 <widgetname>UnivisionTV</widgetname>
 <description> </description>
 <width>1280</width>

@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:tv.samsung.sdk="http://www.samsung.com/tvsdk">
-  <tv.samsung.sdk:VisualScene xmi:id="_2ieUoORMEeGc3-aXEl7Rpg" sId="Scene1" sName="" sType="0" sBgImage="" sBgClr="#ffffff" sWidth="1280" sHeight="720">
-    <sComponents xmi:type="tv.samsung.sdk:VisualCtrlComponent" xmi:id="_A8cnMFYHEeO0kY3uGtmMUw" sWidth="320.0" sHeight="320.0" sBgImage="images/video/video.png" sId="videoPlayer" sCaption="" sResizeOpt="ResizeOption_None" sUserCodeIncludeJs="&lt;script type='text/javascript' language='javascript' src='$MANAGER_WIDGET/Common/service.video.js'>&lt;/script>" sUserCodeInit="" sUserCodeDestroy="" sUserLibJs="" sUserLibImgDir="" sUserLibCss="" sType="video" sFunctionName="sf.service.VideoPlayer" sLockCaption="true" sLockBgImage="true">
-      <sCssAttrs xmi:type="tv.samsung.sdk:CssAttrStruct" xmi:id="_A8cnMVYHEeO0kY3uGtmMUw" sType="NUMBER" sValue="0" sName="left"/>
-      <sCssAttrs xmi:type="tv.samsung.sdk:CssAttrStruct" xmi:id="_A8cnMlYHEeO0kY3uGtmMUw" sType="NUMBER" sValue="0" sName="top"/>
-      <sCssAttrs xmi:type="tv.samsung.sdk:CssAttrStruct" xmi:id="_A8cnM1YHEeO0kY3uGtmMUw" sType="NUMBER" sValue="720" sName="height"/>
-      <sCssAttrs xmi:type="tv.samsung.sdk:CssAttrStruct" xmi:id="_A8cnNFYHEeO0kY3uGtmMUw" sType="NUMBER" sValue="1280" sName="width"/>
-    </sComponents>
-  </tv.samsung.sdk:VisualScene>
+  <tv.samsung.sdk:VisualScene xmi:id="_2ieUoORMEeGc3-aXEl7Rpg" sId="Scene1" sName="" sType="0" sBgImage="" sBgClr="#ffffff" sWidth="1280" sHeight="720"/>
   <notation:Diagram xmi:id="_ZcxSsFVUEeO1YofB2kiC6A" type="VisualScene" element="_2ieUoORMEeGc3-aXEl7Rpg" name="Scene1.scene" measurementUnit="Pixel">
-    <children xmi:type="notation:Shape" xmi:id="_BEWmAFYHEeO0kY3uGtmMUw" type="2001" element="_A8cnMFYHEeO0kY3uGtmMUw" fontName="Lucida Grande">
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BGi-YFYHEeO0kY3uGtmMUw" width="1280" height="720"/>
-    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_2ieUouRMEeGc3-aXEl7Rpg"/>
   </notation:Diagram>
 </xmi:XMI>

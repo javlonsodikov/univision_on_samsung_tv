@@ -10,8 +10,8 @@ SceneUnivisionVideoPlayer.prototype.initialize = function () {
 	// initialize the scene controls and styles, and initialize your variables here
 	// scene HTML and CSS will be loaded before this function is called
 	sf.service.VideoPlayer.init({
-		onend:function(){
-			sf.service.VideoPlayer.setFullScreen(true);
+		onerror:function(error){
+			alert(error);
 		}
 	});
 	//sf.service.VideoPlayer.setKeyHandler(sf.key.RETURN, 
@@ -30,7 +30,7 @@ SceneUnivisionVideoPlayer.prototype.initialize = function () {
 	});
 	sf.service.VideoPlayer.show();
 	
-	Univision.login("univision_username", "univision_password");
+	Univision.login();
 };
 
 SceneUnivisionVideoPlayer.prototype.handleShow = function (data) {
@@ -74,6 +74,19 @@ SceneUnivisionVideoPlayer.prototype.handleKeyDown = function (keyCode) {
 			Univision.playCurrentChannel();
 			break;
 		case sf.key.ENTER:
+			Univision.logout();
+			break;
+		case sf.key.N1:
+			Univision.setCurrentBitrateIndex(0);
+			Univision.playCurrentChannel();
+			break;
+		case sf.key.N2:
+			Univision.setCurrentBitrateIndex(1);
+			Univision.playCurrentChannel();
+			break;
+		case sf.key.N3:
+			Univision.playCurrentChannel();
+			Univision.setCurrentBitrateIndex(2);
 			break;
 		default:
 			alert("handle default key event, key code(" + keyCode + ")");
