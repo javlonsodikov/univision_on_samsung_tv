@@ -141,7 +141,7 @@ Univision.playCurrentChannel = function() {
 	}
 };
 
-Univision.showCurrentChannelName() {
+Univision.showCurrentChannelName = function() {
 	$("#channelName").text(Univision.CHANNEL_NAMES[this.currentChannelIndex]);
 }
 
