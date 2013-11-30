@@ -22,11 +22,12 @@ SceneUnivisionVideoPlayer.prototype.initialize = function () {
 	var vTop = parseInt($("#videoPlayer").css('top'));
 	var vHeight = parseInt($("#videoPlayer").css('height'));
 	var vWidth = parseInt($("#videoPlayer").css('width'));
+	var vInfoBarWidth = parseInt($("#sf-service-videoplayer-mini-infobar").css('width'));
 	sf.service.VideoPlayer.setPosition({
 		left:vLeft,
 		top:vTop,
 		width:vWidth,
-		height:vHeight
+		height:vHeight+vInfoBarWidth
 	});
 	sf.service.VideoPlayer.show();
 	// disable info bar
