@@ -9,11 +9,26 @@ SceneMainMenu.prototype.initialize = function () {
 	// this function will be called only once when the scene manager show this scene first time
 	// initialize the scene controls and styles, and initialize your variables here
 	// scene HTML and CSS will be loaded before this function is called
+	
 	$('#channelList').sfList({
 		data: Univision.CHANNEL_NAMES,
 		index: 0,
 		itemsPerPage: 14
 	});
+};
+
+SceneMainMenu.prototype.updateCurrentTvSchedule = function() {
+	var listItems = new Array();
+	for(var i=0; i < Univision.CHANNEL_NAMES.length; i++) {
+		listItems.push(Univision.CHANNEL_NAMES[i] + " - " + Univision.CURRENT_TV_SCHEDULES[i]);
+	}
+	
+	$('#channelList').sfList({
+		data: listItems,
+		itemsPerPage: 14
+	});
+	
+	$('#channelList').sfList('move', Univision.currentChannelIndex);
 };
 
 SceneMainMenu.prototype.handleShow = function (data) {
@@ -40,9 +55,10 @@ SceneMainMenu.prototype.handleBlur = function () {
 
 SceneMainMenu.prototype.handleKeyDown = function (keyCode) {
 	alert("SceneMainMenu.handleKeyDown(" + keyCode + ")");
-	// TODO : write an key event handler when this scene get focued
+	// TODO : write an key event handler when this scene get focused
 	switch (keyCode) {
 		case sf.key.LEFT:
+			Univision.fetchCurrentTvSchedule();
 			break;
 		case sf.key.RIGHT:
 			break;

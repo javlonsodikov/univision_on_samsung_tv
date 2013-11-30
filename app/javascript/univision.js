@@ -2,8 +2,12 @@ var Univision = {
 	
 };
 
-Univision.CHANNEL_NAMES = ["mnb", "mnb_2", " edu", "ubs", "mn25", "ntv", "tv5", "eagle", "sbn", "tv9", "sportbox", "etv", "mongolhd", "royal", "mnc", "ehoron", "bloomberg", "parliament"];
 Univision.AVAILABLE_BITRATES = [1200000, 750000, 500000];
+
+Univision.CHANNEL_IDS = [1, 24, 23, 3, 22, 4, 26, 25, 27, 31, 32, 5, 2, 38, 39, 9, 41, 42];
+Univision.CHANNEL_NAMES = ["mnb", "mnb_2", "edu", "ubs", "mn25", "ntv", "tv5", "eagle", "sbn", "tv9", "sportbox", "etv", "mongolhd", "royal", "mnc", "ehoron", "bloomberg", "parliament"];
+Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER = [1, 17, 0, 4, 3, 7, 5, 11, 2, 6, 8, 9, 15, 16, 12, 10, 13, 14];
+Univision.CURRENT_TV_SCHEDULES = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 
 Univision.currentChannelIndex = 0;
 Univision.sessionId = null;
@@ -101,6 +105,10 @@ Univision.onLoginSuccessful = function() {
 	alert("login successful");
 	Univision.showMessageInLoadingScene("login successful");
 	
+	// fetch current TV schedule
+	Univision.fetchCurrentTvSchedule();
+	
+	// fetch session id
 	$.ajax({
 		url: "http://tv.univision.mn/24/watch",
 		type: "get",
@@ -131,6 +139,31 @@ Univision.onSessionIdFound = function(sessionId) {
 	sf.scene.hide('Loading');
 	sf.scene.show('MainMenu');
 	sf.scene.focus('MainMenu');
+};
+
+Univision.fetchCurrentTvSchedule = function() {
+	$.ajax({
+		url: "http://tv.univision.mn/",
+		type: "get",
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			
+		},
+		success: function(data) {
+			var tvlist = $(data).find('ul.tvlist');
+			if (tvlist != null) {
+				var channelIndex = 0;
+	            tvlist.children().each(function() {
+	            	var liElement = $(this);
+	            	var scheduleText = liElement.find('div.schedule-now').html().trim().replace('<em>', ' [').replace('</em>', ']').replace('<br>', ' ');
+	            	Univision.CURRENT_TV_SCHEDULES[Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER[channelIndex]] = scheduleText;
+	            	//alert(Univision.CHANNEL_NAMES[Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER[channelIndex]] + " " + scheduleText);
+	            	channelIndex++;
+	            });
+	            
+	            sf.scene.get('MainMenu').updateCurrentTvSchedule();
+			}
+		}
+	});
 };
 
 Univision.playCurrentChannel = function() {
