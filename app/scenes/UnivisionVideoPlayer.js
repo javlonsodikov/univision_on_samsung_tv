@@ -29,21 +29,31 @@ SceneUnivisionVideoPlayer.prototype.initialize = function () {
 		width:vWidth,
 		height:vHeight+vInfoBarWidth
 	});
-	sf.service.VideoPlayer.show();
+	
 	// disable info bar
 	//$('#sf-service-videoplayer-mini-infobar').hide();
-	
-	Univision.login();
+};
+
+SceneUnivisionVideoPlayer.prototype.gotoMainMenu = function () {
+	sf.scene.hide('UnivisionVideoPlayer');
+	sf.scene.show('MainMenu');
+	sf.scene.focus('MainMenu');
 };
 
 SceneUnivisionVideoPlayer.prototype.handleShow = function (data) {
 	alert("SceneUnivisionVideoPlayer.handleShow()");
 	// this function will be called when the scene manager show this scene
+	
+	sf.service.VideoPlayer.show();
+	Univision.playCurrentChannel();
 };
 
 SceneUnivisionVideoPlayer.prototype.handleHide = function () {
 	alert("SceneUnivisionVideoPlayer.handleHide()");
 	// this function will be called when the scene manager hide this scene
+	
+	sf.service.VideoPlayer.stop();
+	sf.service.VideoPlayer.hide();
 };
 
 SceneUnivisionVideoPlayer.prototype.handleFocus = function () {
@@ -61,6 +71,7 @@ SceneUnivisionVideoPlayer.prototype.handleKeyDown = function (keyCode) {
 	// TODO : write an key event handler when this scene get focued
 	switch (keyCode) {
 		case sf.key.LEFT:
+			this.gotoMainMenu();
 			break;
 		case sf.key.RIGHT:
 			break;
@@ -77,7 +88,7 @@ SceneUnivisionVideoPlayer.prototype.handleKeyDown = function (keyCode) {
 			Univision.playCurrentChannel();
 			break;
 		case sf.key.ENTER:
-			Univision.logout();
+			this.gotoMainMenu();
 			break;
 		case sf.key.N1:
 			Univision.setCurrentBitrateIndex(0);

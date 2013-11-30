@@ -94,11 +94,12 @@ Univision.login = function() {
 
 Univision.onLoginFailed = function() {
 	alert("login failed");
-	Univision.showError("LOGF");
+	Univision.showMessageInLoadingScene("login failed!");
 };
 
 Univision.onLoginSuccessful = function() {
 	alert("login successful");
+	Univision.showMessageInLoadingScene("login successful");
 	
 	$.ajax({
 		url: "http://tv.univision.mn/24/watch",
@@ -119,14 +120,17 @@ Univision.onLoginSuccessful = function() {
 
 Univision.onSessionIdNotFound = function() {
 	alert("session id not found!");
-	Univision.showError("SESERR");
+	Univision.showMessageInLoadingScene("session id not found!");
 };
 
 Univision.onSessionIdFound = function(sessionId) {
 	this.sessionId = sessionId;
 	alert(sessionId + " found!");
-		
-	Univision.playCurrentChannel();
+	Univision.showMessageInLoadingScene("session id found");
+	
+	sf.scene.hide('Loading');
+	sf.scene.show('MainMenu');
+	sf.scene.focus('MainMenu');
 };
 
 Univision.playCurrentChannel = function() {
@@ -143,8 +147,12 @@ Univision.playCurrentChannel = function() {
 
 Univision.showCurrentChannelName = function() {
 	$("#channelName").text(Univision.CHANNEL_NAMES[this.currentChannelIndex]);
-}
+};
 
 Univision.showError = function(error) {
 	$("#channelName").text(error);
+};
+
+Univision.showMessageInLoadingScene = function(message) {
+	$("#statusMessage").sfLabel("option", "text", message);
 };

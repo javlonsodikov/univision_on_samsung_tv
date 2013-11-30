@@ -1,6 +1,10 @@
 {
  "files": [],
- "scenes": ["UnivisionVideoPlayer"],
+ "scenes": [
+  "Loading",
+  "MainMenu",
+  "UnivisionVideoPlayer"
+],
  "theme": "base",
  "modules": ["ime"]
 }

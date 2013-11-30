@@ -1,0 +1,25 @@
+#SceneLoading{
+	position : absolute;
+	left : 0px;
+	top : 0px;
+	width : 1280px;
+	height : 720px;
+	background-color : #000000;
+	background-image : url('');
+}
+
+#SceneLoading #loadingImage{
+	position : absolute;
+	left : 611px;
+	top : 333px;
+}
+
+#SceneLoading #statusMessage{
+	position : absolute;
+	font-size : 16pt;
+	color : #ffffff;
+	left : 450px;
+	top : 450px;
+	width : 400px;
+	text-align : center;
+}
