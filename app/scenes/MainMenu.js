@@ -20,7 +20,7 @@ SceneMainMenu.prototype.initialize = function () {
 SceneMainMenu.prototype.updateCurrentTvSchedule = function() {
 	var listItems = new Array();
 	for(var i=0; i < Univision.CHANNEL_NAMES.length; i++) {
-		listItems.push(Univision.CHANNEL_NAMES[i] + " - " + Univision.CURRENT_TV_SCHEDULES[i]);
+		listItems.push(Univision.CHANNEL_NAMES[i] + " - " + Univision.CURRENT_TV_SCHEDULE_NAMES[i]);
 	}
 	
 	$('#channelList').sfList({

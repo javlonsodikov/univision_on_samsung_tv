@@ -16,18 +16,16 @@
 	width : 1280px;
 }
 
-#SceneUnivisionVideoPlayer #channelName {
+#SceneUnivisionVideoPlayer #channelInfo {
 	z-index : 99;
 	position : absolute;
-	border-radius: 15px;
 	left : 20px;
-	top : 20px;
-	width : 100px;
-	height : 50px;
-	line-height : 50px;
-	text-align : center;
-	vertical-align: middle;
-	font-weight : bold;
-	color : black;
-	background-color : #555555;
+	top : 320px;
+	color : #ffffff;
+	font-size: 20px;
+}
+
+#SceneUnivisionVideoPlayer #channelInfo #channelName {
+	font-size: 24px;
+	color: green;
 }

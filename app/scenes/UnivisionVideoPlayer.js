@@ -40,6 +40,17 @@ SceneUnivisionVideoPlayer.prototype.gotoMainMenu = function () {
 	sf.scene.focus('MainMenu');
 };
 
+SceneUnivisionVideoPlayer.prototype.showCurrentChannelInfo = function () {	
+	$("#channelName").text(Univision.CHANNEL_NAMES[Univision.currentChannelIndex]);
+	$("#channelCurrentProgramInfo").text(Univision.CURRENT_TV_SCHEDULE_NAMES[Univision.currentChannelIndex]);
+	$("#channelCurrentProgramTime").text(Univision.CURRENT_TV_SCHEDULE_TIMES[Univision.currentChannelIndex]);
+	
+	$("#channelInfo").show();
+	setTimeout(function() {
+		$("#channelInfo").hide();
+	}, 10000);
+};
+
 SceneUnivisionVideoPlayer.prototype.handleShow = function (data) {
 	alert("SceneUnivisionVideoPlayer.handleShow()");
 	// this function will be called when the scene manager show this scene
@@ -68,7 +79,7 @@ SceneUnivisionVideoPlayer.prototype.handleBlur = function () {
 
 SceneUnivisionVideoPlayer.prototype.handleKeyDown = function (keyCode) {
 	alert("SceneUnivisionVideoPlayer.handleKeyDown(" + keyCode + ")");
-	// TODO : write an key event handler when this scene get focued
+	// TODO : write an key event handler when this scene get focused
 	switch (keyCode) {
 		case sf.key.LEFT:
 			this.gotoMainMenu();
@@ -89,6 +100,9 @@ SceneUnivisionVideoPlayer.prototype.handleKeyDown = function (keyCode) {
 			break;
 		case sf.key.ENTER:
 			this.gotoMainMenu();
+			break;
+		case sf.key.INFO:
+			this.showCurrentChannelInfo();
 			break;
 		case sf.key.N1:
 			Univision.setCurrentBitrateIndex(0);

@@ -6,8 +6,10 @@ Univision.AVAILABLE_BITRATES = [1200000, 750000, 500000];
 
 Univision.CHANNEL_IDS = [1, 24, 23, 3, 22, 4, 26, 25, 27, 31, 32, 5, 2, 38, 39, 9, 41, 42];
 Univision.CHANNEL_NAMES = ["mnb", "mnb_2", "edu", "ubs", "mn25", "ntv", "tv5", "eagle", "sbn", "tv9", "sportbox", "etv", "mongolhd", "royal", "mnc", "ehoron", "bloomberg", "parliament"];
+
 Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER = [1, 17, 0, 4, 3, 7, 5, 11, 2, 6, 8, 9, 15, 16, 12, 10, 13, 14];
-Univision.CURRENT_TV_SCHEDULES = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+Univision.CURRENT_TV_SCHEDULE_NAMES = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+Univision.CURRENT_TV_SCHEDULE_TIMES = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 
 Univision.currentChannelIndex = 0;
 Univision.sessionId = null;
@@ -154,9 +156,13 @@ Univision.fetchCurrentTvSchedule = function() {
 				var channelIndex = 0;
 	            tvlist.children().each(function() {
 	            	var liElement = $(this);
-	            	var scheduleText = liElement.find('div.schedule-now').html().trim().replace('<em>', ' [').replace('</em>', ']').replace('<br>', ' ');
-	            	Univision.CURRENT_TV_SCHEDULES[Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER[channelIndex]] = scheduleText;
-	            	//alert(Univision.CHANNEL_NAMES[Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER[channelIndex]] + " " + scheduleText);
+	            	var scheduleHtmlText = liElement.find('div.schedule-now').html().trim().replace('<em>', '').replace('</em>', '');
+	            	if (scheduleHtmlText.indexOf('<br>') >= 0) {
+		            	var scheduleTime = scheduleHtmlText.split('<br>')[0];
+		            	var scheduleName = scheduleHtmlText.split('<br>')[1];
+		            	Univision.CURRENT_TV_SCHEDULE_TIMES[Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER[channelIndex]] = scheduleTime;
+		            	Univision.CURRENT_TV_SCHEDULE_NAMES[Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER[channelIndex]] = scheduleName;
+	            	}
 	            	channelIndex++;
 	            });
 	            
@@ -171,19 +177,15 @@ Univision.playCurrentChannel = function() {
 	var currentChannel = Univision.getCurrentChannel();
 	if (currentChannel != null) {
 		alert("video url: " + currentChannel.url);
-		Univision.showCurrentChannelName();
+		sf.scene.get('UnivisionVideoPlayer').showCurrentChannelInfo();
 		sf.service.VideoPlayer.play(Univision.getCurrentChannel());
 	} else {
 		Univision.showError("INVCH");
 	}
 };
 
-Univision.showCurrentChannelName = function() {
-	$("#channelName").text(Univision.CHANNEL_NAMES[this.currentChannelIndex]);
-};
-
 Univision.showError = function(error) {
-	$("#channelName").text(error);
+	alert(error);
 };
 
 Univision.showMessageInLoadingScene = function(message) {
