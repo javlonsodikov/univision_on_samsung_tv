@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:tv.samsung.sdk="http://www.samsung.com/tvsdk">
   <tv.samsung.sdk:VisualScene xmi:id="_UBpdgFnYEeOXFrF4Uy5y-g" sId="5i7w1iyddncxn" sName="MainMenu" sType="2" sBgImage="" sBgClr="#000000" sWidth="1280" sHeight="720">
-    <sComponents xmi:type="tv.samsung.sdk:VisualCtrlComponent" xmi:id="_QHU_YFoMEeOXFrF4Uy5y-g" sWidth="112.0" sHeight="149.0" sBgImage="images/listbox/listbox.png" sId="channelList" sCaption="" sResizeOpt="ResizeOption_Width" sUserCodeIncludeJs="" sUserCodeInit="" sUserCodeDestroy="" sUserLibJs="" sUserLibImgDir="" sUserLibCss="" sType="listbox" sFunctionName="sfList" sLockCaption="true" sLockHeight="true" sLockBgImage="true">
-      <sCssAttrs xmi:type="tv.samsung.sdk:CssAttrStruct" xmi:id="_QHU_YVoMEeOXFrF4Uy5y-g" sType="NUMBER" sValue="140" sName="left"/>
-      <sCssAttrs xmi:type="tv.samsung.sdk:CssAttrStruct" xmi:id="_QHU_YloMEeOXFrF4Uy5y-g" sType="NUMBER" sValue="20" sName="top"/>
-      <sCssAttrs xmi:type="tv.samsung.sdk:CssAttrStruct" xmi:id="_QHU_Y1oMEeOXFrF4Uy5y-g" sType="NUMBER" sValue="1000" sName="width"/>
-      <sParams xmi:type="tv.samsung.sdk:ParamStruct" xmi:id="_QHU_ZFoMEeOXFrF4Uy5y-g" sName="data" sValue="Univision.CHANNEL_NAMES" sType="ARRAY"/>
-      <sParams xmi:type="tv.samsung.sdk:ParamStruct" xmi:id="_QHU_ZVoMEeOXFrF4Uy5y-g" sName="index" sValue="0" sType="NUMBER"/>
-      <sParams xmi:type="tv.samsung.sdk:ParamStruct" xmi:id="_QHU_ZloMEeOXFrF4Uy5y-g" sName="itemsPerPage" sValue="14" sType="NUMBER"/>
+    <sComponents xmi:type="tv.samsung.sdk:VisualCtrlComponent" xmi:id="_HndW8GKaEeO-69WWeKapXQ" sWidth="112.0" sHeight="149.0" sBgImage="images/listbox/listbox.png" sId="channelList" sCaption="" sResizeOpt="ResizeOption_Width" sUserCodeIncludeJs="" sUserCodeInit="" sUserCodeDestroy="" sUserLibJs="" sUserLibImgDir="" sUserLibCss="" sType="listbox" sFunctionName="sfList" sLockCaption="true" sLockHeight="true" sLockBgImage="true">
+      <sCssAttrs xmi:type="tv.samsung.sdk:CssAttrStruct" xmi:id="_HndW8WKaEeO-69WWeKapXQ" sType="NUMBER" sValue="140" sName="left"/>
+      <sCssAttrs xmi:type="tv.samsung.sdk:CssAttrStruct" xmi:id="_HndW8mKaEeO-69WWeKapXQ" sType="NUMBER" sValue="20" sName="top"/>
+      <sCssAttrs xmi:type="tv.samsung.sdk:CssAttrStruct" xmi:id="_HndW82KaEeO-69WWeKapXQ" sType="NUMBER" sValue="1000" sName="width"/>
+      <sParams xmi:type="tv.samsung.sdk:ParamStruct" xmi:id="_HndW9GKaEeO-69WWeKapXQ" sName="data" sValue="Univision.CHANNEL_NAMES" sType="ARRAY"/>
+      <sParams xmi:type="tv.samsung.sdk:ParamStruct" xmi:id="_HndW9WKaEeO-69WWeKapXQ" sName="index" sValue="0" sType="NUMBER"/>
+      <sParams xmi:type="tv.samsung.sdk:ParamStruct" xmi:id="_HndW9mKaEeO-69WWeKapXQ" sName="itemsPerPage" sValue="14" sType="NUMBER"/>
     </sComponents>
   </tv.samsung.sdk:VisualScene>
   <notation:Diagram xmi:id="_UBpdgVnYEeOXFrF4Uy5y-g" type="VisualScene" element="_UBpdgFnYEeOXFrF4Uy5y-g" name="MainMenu.scene" measurementUnit="Pixel">
-    <children xmi:type="notation:Shape" xmi:id="_QHU_Z1oMEeOXFrF4Uy5y-g" type="2001" element="_QHU_YFoMEeOXFrF4Uy5y-g" fontName="Lucida Grande">
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QHU_aVoMEeOXFrF4Uy5y-g" x="140" y="20" width="1000" height="149"/>
+    <children xmi:type="notation:Shape" xmi:id="_HndW92KaEeO-69WWeKapXQ" type="2001" element="_HndW8GKaEeO-69WWeKapXQ" fontName="Lucida Grande">
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HndW-WKaEeO-69WWeKapXQ" x="140" y="20" width="1000" height="149"/>
     </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_UBpdglnYEeOXFrF4Uy5y-g"/>
   </notation:Diagram>

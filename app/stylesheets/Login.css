@@ -1,0 +1,43 @@
+#SceneLogin {
+	position : absolute;
+	left : 0px;
+	top : 0px;
+	width : 1280px;
+	height : 720px;
+	background-color : #000000;
+	background-image : url('');
+}
+#SceneLogin #usernameTextInput{
+	position : absolute;
+	left : 53px;
+	top : 60px;
+	width : 251px;
+}
+#SceneLogin #passwordTextInput{
+	position : absolute;
+	left : 53px;
+	top : 190px;
+	width : 251px;
+}
+#SceneLogin #loginButton{
+	position : absolute;
+	left : 130px;
+	top : 300px;
+	width : 164px;
+}
+#SceneLogin #usernameLabel{
+	position : absolute;
+	font-size : 16pt;
+	color : #ffffff;
+	left : 70px;
+	top : 30px;
+	width : 130px;
+}
+#SceneLogin #passwordLabel{
+	position : absolute;
+	font-size : 16pt;
+	color : #ffffff;
+	left : 70px;
+	top : 160px;
+	width : 130px;
+}

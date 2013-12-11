@@ -3,8 +3,9 @@
  "scenes": [
   "Loading",
   "MainMenu",
-  "UnivisionVideoPlayer"
-],
+  "UnivisionVideoPlayer",
+  "Login"
+ ],
  "theme": "base",
- "modules": ["ime"]
+ "modules": ["ui.*", "ime"]
 }
