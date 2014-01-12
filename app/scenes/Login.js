@@ -33,18 +33,19 @@ SceneLogin.prototype.initialize = function () {
 		text:'',
 		maxlength:20,
 		ontextchanged: function (text) {
-			
+			alert("**************************************** texi");
 		},
 		oncomplete: function (text) {
-			
+			alert("*********************************** compi");
 		},
 		onkeypadchanged: function (keypadtype) {
+			alert("---------------------------------------- keypad changed");
 			var width = $('#passwordTextInput').width();
 			var offset = $('#passwordTextInput').offset();
 			if (keypadtype.toLowerCase() === '12key') {
-				
+				alert( "------************************************ 12key ");
 			} else {
-				
+				alert("**************************************************** ktype:  " + keypadtype.toLowerCase());
 			}
 			$('#passwordTextInput').sfTextInput('setKeypadPos', offset.left + width + 10, offset.top);
 		}
@@ -93,7 +94,13 @@ SceneLogin.prototype.handleKeyDown = function (keyCode) {
 			
 			break;
 		case sf.key.DOWN:
-			$('#passwordTextInput').sfTextInput('focus');
+			alert("Down key pressed -----");
+			if($('#usernameTextInput').hasClass('active')){
+				alert("*********************************************************Username has focus");
+			}else if($('#passwordTextInput').hasClass('active')){
+				alert("*********************************************************Password has focus");
+			}
+			//$('#passwordTextInput').sfTextInput('focus');
 			break;
 		case sf.key.ENTER:
 			
