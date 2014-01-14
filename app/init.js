@@ -8,7 +8,7 @@ function onStart () {
 		fs.createCommonDir(curWidget.id);
 	}
 	// check if a account file exists
-	var accfile = fs.openCommonFile(curWidget.id + "/accdata.dat", "w"); // use "r+" for update
+	var accfile = fs.openCommonFile(curWidget.id + "/accdata.dat", "r"); // use "r+" for update
 	var strLine = '';
 	var uname = "username=";
 	var pass = "password=";
@@ -27,8 +27,15 @@ function onStart () {
 		sf.scene.show('Login');
 		sf.scene.focus('Login');
 	}else{
-		alert("--- written lines: " + acdata.length);
 		alert("================================================================ account data found! ====");
+		var ustr = acdata[0];
+		var passstr = acdata[1];
+		var username = ustr.substring(uname.length, ustr.length);
+		var password = passstr.substring(pass.length, passstr.length);
+		Univision.username = username;
+		Univision.password = password;
+		sf.scene.show('Loading');
+		sf.scene.focus('Loading');
 	}
 	
 }

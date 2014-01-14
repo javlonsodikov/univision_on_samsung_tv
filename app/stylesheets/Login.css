@@ -7,37 +7,51 @@
 	background-color : #000000;
 	background-image : url('');
 }
-#SceneLogin #usernameTextInput{
-	position : absolute;
-	left : 53px;
-	top : 60px;
-	width : 251px;
-}
-#SceneLogin #passwordTextInput{
-	position : absolute;
-	left : 53px;
-	top : 190px;
-	width : 251px;
-}
-#SceneLogin #loginButton{
-	position : absolute;
-	left : 130px;
-	top : 300px;
-	width : 164px;
-}
-#SceneLogin #usernameLabel{
-	position : absolute;
-	font-size : 16pt;
-	color : #ffffff;
-	left : 70px;
-	top : 30px;
-	width : 130px;
-}
-#SceneLogin #passwordLabel{
-	position : absolute;
-	font-size : 16pt;
-	color : #ffffff;
-	left : 70px;
-	top : 160px;
-	width : 130px;
-}
+
+.TextBox {
+	position:relative;
+	width: 280px; height: 90px;
+	margin:20px 8px 20px 8px; padding:8px 8px 8px 8px;
+	outline : solid 1px #666666;}
+
+.TextFont {
+        /* top, right, bottom, left*/        
+	margin:8px 4px 8px 4px; padding:8px 8px 8px 8px;
+	font-size: 30px; color:#000000; font-style: SVD_Medium; text-align:left;
+	text-shadow:+0px +1px +0px #999999; line-height:30px;  letter-spacing:-0.02em;
+	outline : solid 0px #660000;}
+
+/* #SceneLogin #usernameTextInput{ */
+/* 	position : absolute; */
+/* 	left : 53px; */
+/* 	top : 60px; */
+/* 	width : 251px; */
+/* } */
+/* #SceneLogin #passwordTextInput{ */
+/* 	position : absolute; */
+/* 	left : 53px; */
+/* 	top : 190px; */
+/* 	width : 251px; */
+/* } */
+/* #SceneLogin #loginButton{ */
+/* 	position : absolute; */
+/* 	left : 130px; */
+/* 	top : 300px; */
+/* 	width : 164px; */
+/* } */
+/* #SceneLogin #usernameLabel{ */
+/* 	position : absolute; */
+/* 	font-size : 16pt; */
+/* 	color : #ffffff; */
+/* 	left : 70px; */
+/* 	top : 30px; */
+/* 	width : 130px; */
+/* } */
+/* #SceneLogin #passwordLabel{ */
+/* 	position : absolute; */
+/* 	font-size : 16pt; */
+/* 	color : #ffffff; */
+/* 	left : 70px; */
+/* 	top : 160px; */
+/* 	width : 130px; */
+/* } */

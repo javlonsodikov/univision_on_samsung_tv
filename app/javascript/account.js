@@ -1,4 +1,4 @@
 var Account = {
-	USERNAME: "ntdjdev",
-	PASSWORD: "wol444"
+	USERNAME: "account",
+	PASSWORD: "password"
 };

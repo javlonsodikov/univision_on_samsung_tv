@@ -15,6 +15,9 @@ Univision.currentChannelIndex = 0;
 Univision.sessionId = null;
 Univision.currentBitrateIndex = 0;
 
+Univision.username = '';
+Univision.password = '';
+
 Univision.channelUp = function() {
 	this.currentChannelIndex += 1;
 	if (this.currentChannelIndex >= Univision.CHANNEL_NAMES.length) {
@@ -62,6 +65,7 @@ Univision.logout = function() {
 };
 
 Univision.login = function() {
+	Univision.showMessageInLoadingScene("Loading");
 	$.ajax({
 		url: "http://my.univision.mn/index.php/login",
 		type: "get",
@@ -71,14 +75,17 @@ Univision.login = function() {
 			if (csrfTokenIndex > 0) {
 				var csrfToken = response.substring(csrfTokenIndex + 21, csrfTokenIndex + 21 + 32);
 				alert("csrf: " + csrfToken);
-				
+				alert("*******************************************************************************");
+				alert("uname : " + Univision.username);
+				alert("password: " + Univision.password  );
+				alert("*******************************************************************************");
 				$.ajax({
 					url: "http://my.univision.mn/index.php/login",
 					type: "post",
 					data: {
 						"signin[_csrf_token]": csrfToken,
-						"signin[username]": Account.USERNAME,
-						"signin[password]": Account.PASSWORD,
+						"signin[username]": Univision.username,
+						"signin[password]": Univision.password,
 						"submit": "Нэвтрэх"
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -101,6 +108,11 @@ Univision.login = function() {
 Univision.onLoginFailed = function() {
 	alert("login failed");
 	Univision.showMessageInLoadingScene("login failed!");
+	setTimeout(function (){
+		sf.scene.hide('Loading');
+		sf.scene.show('Login');
+		sf.scene.focus('Login');
+	}, 2000);
 };
 
 Univision.onLoginSuccessful = function() {
