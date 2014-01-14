@@ -8,7 +8,7 @@ function onStart () {
 		fs.createCommonDir(curWidget.id);
 	}
 	// check if a account file exists
-	var accfile = fs.openCommonFile(curWidget.id + "/accdata.dat", "r"); // use "r+" for update
+	var accfile = fs.openCommonFile(curWidget.id + "/accdata.dat", "a+"); // use "r+" for update
 	var strLine = '';
 	var uname = "username=";
 	var pass = "password=";
