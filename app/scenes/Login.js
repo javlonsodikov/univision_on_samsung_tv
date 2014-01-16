@@ -12,7 +12,7 @@ function SceneLogin() {
 			document.getElementById(id).focus();
 		};
 		ime = new IMEShell(id, imeReady);
-		element = document.getElementById( id );
+		element = document.getElementById(id);
 	};
 	
 	this.init = function () {
@@ -31,14 +31,13 @@ function SceneLogin() {
 				this.nextItem(-1);
 			}else{
 				// save username password
-				alert("savin username password..");
+				alert("saving username password..");
 				var fs = new FileSystem();
 				if(fs.isValidCommonPath(curWidget.id) == 0){
 					fs.createCommonDir(curWidget.id);
 				}
 				// check if a account file exists
 				var accfile = fs.openCommonFile(curWidget.id + "/accdata.dat", "w"); // use "r+" for update
-				var strLine = '';
 				var unamestr = "username=" + uname;
 				var passstr = "password=" + pass;
 				accfile.writeAll(unamestr + "\n" + passstr);
@@ -52,7 +51,6 @@ function SceneLogin() {
 		}else{
 			element.focus();
 		}
-		
 	};
 	
 	this.nextItem = function (dir) {
@@ -63,10 +61,11 @@ function SceneLogin() {
 		if (ItemCursor < 0) {
 			ItemCursor = 2;
 		} else if (ItemCursor > 2) {
-			ItemCursor = 0
+			ItemCursor = 0;
 		}
 		
 		$("#div_obj_" + ItemCursor).css('outline', 'solid 4px #FF4500');
+		
 		if(ItemCursor != 2){
 			this.createIME("input_obj_" + ItemCursor);
 		}
@@ -74,14 +73,6 @@ function SceneLogin() {
 	
 	var onReturnScene = function () {
 		element.blur();
-	};
-	
-	var installStatusCallbacks = function(_ime) {
-		alert("   installStatusCallbacks. [START]");
-		_ime.setOnCompleteFunc(onComplete);		
-		_ime.setEnterFunc(onEnter);
-		_ime.setKeyFunc(sf.key.RETURN, onReturnScene);
-		alert("   installStatusCallbacks. [End] " );
 	};
 	
 	var onComplete = function() {
@@ -93,9 +84,18 @@ function SceneLogin() {
 	
 	var onEnter = function(string) {
 		alert("  onEnter: Enter key pressed in " + element.id + ", string is " + string);
+		
+		ime.hide();
+		sf.scene.returnFocus();
 	};
 	
-
+	var installStatusCallbacks = function(_ime) {
+		alert("installStatusCallbacks. [START]");
+		_ime.setOnCompleteFunc(onComplete);		
+		_ime.setEnterFunc(onEnter);
+		_ime.setKeyFunc(sf.key.RETURN, onReturnScene);
+		alert("installStatusCallbacks. [End] " );
+	};
 };
 
 SceneLogin.prototype.initialize = function () {
@@ -127,7 +127,7 @@ SceneLogin.prototype.handleBlur = function () {
 
 SceneLogin.prototype.handleKeyDown = function (keyCode) {
 	alert("SceneLogin.handleKeyDown(" + keyCode + ")");
-	// TODO : write an key event handler when this scene get focued
+	// TODO : write an key event handler when this scene get focused
 	switch (keyCode) {
 	case sf.key.LEFT:
 		this.nextItem(-1);
