@@ -75,6 +75,10 @@ SceneMainMenu.prototype.handleKeyDown = function (keyCode) {
 			sf.scene.show('UnivisionVideoPlayer');
 			sf.scene.focus('UnivisionVideoPlayer');
 			break;
+		case sf.key.BLUE:
+            sf.scene.hide('MainMenu');
+            sf.scene.show('Login');
+            sf.scene.focus('Login');
 		default:
 			alert("handle default key event, key code(" + keyCode + ")");
 			break;

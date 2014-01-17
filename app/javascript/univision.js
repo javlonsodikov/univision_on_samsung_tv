@@ -71,14 +71,15 @@ Univision.login = function() {
 			if (csrfTokenIndex > 0) {
 				var csrfToken = response.substring(csrfTokenIndex + 21, csrfTokenIndex + 21 + 32);
 				alert("csrf: " + csrfToken);
-				
+				alert("Username: " + Account.username);
+				alert("Password: " + Account.password);
 				$.ajax({
 					url: "http://my.univision.mn/index.php/login",
 					type: "post",
 					data: {
 						"signin[_csrf_token]": csrfToken,
-						"signin[username]": Account.USERNAME,
-						"signin[password]": Account.PASSWORD,
+						"signin[username]": Account.username,
+						"signin[password]": Account.password,
 						"submit": "Нэвтрэх"
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -101,6 +102,12 @@ Univision.login = function() {
 Univision.onLoginFailed = function() {
 	alert("login failed");
 	Univision.showMessageInLoadingScene("login failed!");
+	
+	setTimeout(function () {
+        sf.scene.hide('Loading');
+        sf.scene.show('Login');
+        sf.scene.focus('Login');
+	}, 2000);
 };
 
 Univision.onLoginSuccessful = function() {

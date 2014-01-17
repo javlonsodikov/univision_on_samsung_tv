@@ -1,31 +1,41 @@
 alert('SceneLogin.js loaded');
 
 function SceneLogin() {
-	var selected = 0;
 	
-	this.selectNext = function(direction) {
-		selected += direction;
-		if (selected < 0) {
-			selected = 2;
-		}
-		if (selected > 2) {
-			selected = 0;
-		}
-		
-		if (selected == 0) {
-			$('#passwordTextInput').sfTextInput('blur');
-			$('#loginButton').sfButton('blur');
-			$('#usernameTextInput').sfTextInput('focus');
-		} else if (selected == 1) {
-			$('#usernameTextInput').sfTextInput('blur');
-			$('#loginButton').sfButton('blur');
-			$('#passwordTextInput').sfTextInput('focus');
-		} else {
-			$('#passwordTextInput').sfTextInput('blur');
-			$('#usernameTextInput').sfTextInput('blur');
-			$('#loginButton').sfButton('focus');
-		}
-	};
+};
+
+SceneLogin.selected = 0;
+
+SceneLogin.selectNext = function(direction) {
+	this.selected += direction;
+	if (this.selected < 0) {
+		this.selected = 2;
+	}
+	if (this.selected > 2) {
+		this.selected = 0;
+	}
+	
+	if (this.selected == 0) {
+		$('#passwordTextInput').sfTextInput('blur');
+		$('#loginButton').sfButton('blur');
+		$('#usernameTextInput').sfTextInput('focus');
+	} else if (this.selected == 1) {
+		$('#usernameTextInput').sfTextInput('blur');
+		$('#loginButton').sfButton('blur');
+		$('#passwordTextInput').sfTextInput('focus');
+	} else {
+		$('#passwordTextInput').sfTextInput('blur');
+		$('#usernameTextInput').sfTextInput('blur');
+		$('#loginButton').sfButton('focus');
+	}
+};
+
+SceneLogin.login = function() {
+	Account.saveToFile();
+	
+	sf.scene.hide('Login');
+    sf.scene.show('Loading');
+    sf.scene.focus('Loading');
 };
 
 SceneLogin.prototype.initialize = function () {
@@ -51,9 +61,9 @@ SceneLogin.prototype.initialize = function () {
 		},
 		oncomplete: function (text) {
 			if (text) {
-				Account.USERNAME = text;
+				Account.username = text;
 			} else {
-				$('#usernameTextInput').find('input:not("button")').val(Account.USERNAME);
+				$('#usernameTextInput').find('input:not("button")').val(Account.username);
 			}
 			SceneLogin.selected = 1;
 			$('#passwordTextInput').sfTextInput('focus');
@@ -69,7 +79,7 @@ SceneLogin.prototype.initialize = function () {
 			$('#usernameTextInput').sfTextInput('setKeypadPos', offset.left + width + 10, offset.top);
 		}
 	});
-	$('#usernameTextInput').find('input:not("button")').val(Account.USERNAME);
+	$('#usernameTextInput').find('input:not("button")').val(Account.username);
 	
 	$('#passwordTextInput').sfTextInput({
 		text:'',
@@ -79,9 +89,9 @@ SceneLogin.prototype.initialize = function () {
 		},
 		oncomplete: function (text) {
 			if (text) {
-				Account.USERNAME = text;
+				Account.password = text;
 			} else {
-				$('#passwordTextInput').find('input:not("button")').val(Account.PASSWORD);
+				$('#passwordTextInput').find('input:not("button")').val(Account.password);
 			}
 			SceneLogin.selected = 2;
 			$('#loginButton').sfButton('focus');
@@ -97,7 +107,7 @@ SceneLogin.prototype.initialize = function () {
 			$('#passwordTextInput').sfTextInput('setKeypadPos', offset.left + width + 10, offset.top);
 		}
 	});
-	$('#passwordTextInput').find('input:not("button")').val(Account.PASSWORD);
+	$('#passwordTextInput').find('input:not("button")').val(Account.password);
 	
 	$('#loginButton').sfButton({
 		text:'Login'
@@ -135,17 +145,17 @@ SceneLogin.prototype.handleKeyDown = function (keyCode) {
 			this.selectNext(-1);
 			break;
 		case sf.key.RIGHT:
-			this.selectNext(1);
+			SceneLogin.selectNext(1);
 			break;
 		case sf.key.UP:
-			this.selectNext(-1);
+			SceneLogin.selectNext(-1);
 			break;
 		case sf.key.DOWN:
-			this.selectNext(1);
+			SceneLogin.selectNext(1);
 			break;
 		case sf.key.ENTER:
-			if (this.selected == 2) {
-				alert("Please login!");
+			if (SceneLogin.selected == 2) {
+				SceneLogin.login();
 			}
 			break;
 		default:
