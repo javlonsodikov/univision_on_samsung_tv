@@ -13,7 +13,14 @@ SceneMainMenu.prototype.initialize = function () {
 	$('#channelList').sfList({
 		data: Univision.CHANNEL_NAMES,
 		index: 0,
-		itemsPerPage: 14
+		itemsPerPage: 13
+	});
+	
+	$('#keyHelp').sfKeyHelp({
+		'user': Account.username,
+		'updown':'Channel',
+		'enter': 'Watch',
+		'blue':'Login'
 	});
 };
 
@@ -25,7 +32,7 @@ SceneMainMenu.prototype.updateCurrentTvSchedule = function() {
 	
 	$('#channelList').sfList({
 		data: listItems,
-		itemsPerPage: 14
+		itemsPerPage: 13
 	});
 	
 	$('#channelList').sfList('move', Univision.currentChannelIndex);
