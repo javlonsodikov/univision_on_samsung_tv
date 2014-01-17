@@ -124,6 +124,8 @@ SceneLogin.prototype.handleShow = function (data) {
 	$('#passwordTextInput').removeClass("focused", 0);
 	$('#loginButton').sfButton('blur');
 	$('#usernameTextInput').sfTextInput('focus');
+	
+	document.getElementById('passwordTextInput').children[1].children[0].setAttribute('type', 'password');
 };
 
 SceneLogin.prototype.handleHide = function () {
