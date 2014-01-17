@@ -10,19 +10,19 @@
 #SceneLogin #usernameTextInput{
 	position : absolute;
 	left : 53px;
-	top : 60px;
+	top : 100px;
 	width : 251px;
 }
 #SceneLogin #passwordTextInput{
 	position : absolute;
 	left : 53px;
-	top : 190px;
+	top : 230px;
 	width : 251px;
 }
 #SceneLogin #loginButton{
 	position : absolute;
 	left : 130px;
-	top : 300px;
+	top : 340px;
 	width : 164px;
 }
 #SceneLogin #usernameLabel{
@@ -30,7 +30,7 @@
 	font-size : 16pt;
 	color : #ffffff;
 	left : 70px;
-	top : 30px;
+	top : 70px;
 	width : 130px;
 }
 #SceneLogin #passwordLabel{
@@ -38,6 +38,14 @@
 	font-size : 16pt;
 	color : #ffffff;
 	left : 70px;
-	top : 160px;
+	top : 200px;
 	width : 130px;
+}
+#SceneLogin #mainHeader{
+	position : absolute;
+	font-size : 28pt;
+	color : #1b7315;
+	left : 460px;
+	top : 31px;
+	width : 422px;
 }

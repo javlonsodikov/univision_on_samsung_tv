@@ -19,6 +19,7 @@ SceneLoading.prototype.handleShow = function (data) {
 	alert("SceneLoading.handleShow()");
 	// this function will be called when the scene manager show this scene
 	
+	$('#loadingImage').sfLoading('show');
 	Univision.login();
 };
 

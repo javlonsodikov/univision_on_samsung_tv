@@ -76,7 +76,7 @@ SceneLogin.prototype.initialize = function () {
 			} else {
 				
 			}
-			$('#usernameTextInput').sfTextInput('setKeypadPos', offset.left + width + 10, offset.top);
+			$('#usernameTextInput').sfTextInput('setKeypadPos', offset.left + width + 50, offset.top);
 		}
 	});
 	$('#usernameTextInput').find('input:not("button")').val(Account.username);
@@ -104,7 +104,7 @@ SceneLogin.prototype.initialize = function () {
 			} else {
 				
 			}
-			$('#passwordTextInput').sfTextInput('setKeypadPos', offset.left + width + 10, offset.top);
+			$('#passwordTextInput').sfTextInput('setKeypadPos', offset.left + width + 50, offset.top);
 		}
 	});
 	$('#passwordTextInput').find('input:not("button")').val(Account.password);
@@ -112,14 +112,18 @@ SceneLogin.prototype.initialize = function () {
 	$('#loginButton').sfButton({
 		text:'Login'
 	});
+	$('#mainHeader').sfLabel({
+		text:'Univision AnywhereTV'
+	});
 };
 
 SceneLogin.prototype.handleShow = function (data) {
 	alert("SceneLogin.handleShow()");
 	// this function will be called when the scene manager show this scene
 	
-	$('#usernameTextInput').sfTextInput('focus');
 	$('#passwordTextInput').removeClass("focused", 0);
+	$('#loginButton').sfButton('blur');
+	$('#usernameTextInput').sfTextInput('focus');
 };
 
 SceneLogin.prototype.handleHide = function () {
