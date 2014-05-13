@@ -28,7 +28,9 @@ Account.loadFromFile = function() {
 			Account.password = line.substring(Account.PASSWORD_PREFIX.length, line.length);
 		}
 	}
-	
+	//alert('Loaded from file: -----------------------------');
+	//alert(Account.username);
+	//alert(Account.password);
 	fs.closeCommonFile(af);
 };
 

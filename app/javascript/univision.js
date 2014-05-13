@@ -63,23 +63,22 @@ Univision.logout = function() {
 
 Univision.login = function() {
 	$.ajax({
-		url: "http://my.univision.mn/index.php/login",
+		url: "https://my.univision.mn/index.php/login",
 		type: "get",
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			var response = XMLHttpRequest.responseText;
+			alert(response);
 			var csrfTokenIndex = response.indexOf("_csrf_token");
 			if (csrfTokenIndex > 0) {
 				var csrfToken = response.substring(csrfTokenIndex + 21, csrfTokenIndex + 21 + 32);
-				alert("csrf: " + csrfToken);
-				alert("Username: " + Account.username);
-				alert("Password: " + Account.password);
 				$.ajax({
-					url: "http://my.univision.mn/index.php/login",
+					url: "https://my.univision.mn/index.php/login",
 					type: "post",
 					data: {
 						"signin[_csrf_token]": csrfToken,
 						"signin[username]": Account.username,
 						"signin[password]": Account.password,
+						"signin[remember]": 'true',
 						"submit": "Нэвтрэх"
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) {
