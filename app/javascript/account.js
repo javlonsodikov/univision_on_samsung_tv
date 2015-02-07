@@ -20,17 +20,12 @@ Account.loadFromFile = function() {
 	var line = '';
 	while(line = af.readLine()){
 		if (line.substring(0, Account.USERNAME_PREFIX.length) == Account.USERNAME_PREFIX) {
-			alert('username found');
 			Account.username = line.substring(Account.USERNAME_PREFIX.length, line.length);
 		}
 		if (line.substring(0, Account.PASSWORD_PREFIX.length) == Account.PASSWORD_PREFIX) {
-			alert('password found');
 			Account.password = line.substring(Account.PASSWORD_PREFIX.length, line.length);
 		}
 	}
-	//alert('Loaded from file: -----------------------------');
-	//alert(Account.username);
-	//alert(Account.password);
 	fs.closeCommonFile(af);
 };
 

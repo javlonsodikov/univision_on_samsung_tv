@@ -4,12 +4,14 @@ var Univision = {
 
 Univision.AVAILABLE_BITRATES = [1200000, 750000, 500000];
 
-Univision.CHANNEL_IDS = [1, 24, 23, 3, 22, 4, 26, 25, 27, 31, 32, 5, 2, 38, 39, 9, 41, 42];
-Univision.CHANNEL_NAMES = ["mnb", "mnb_2", "edu", "ubs", "mn25", "ntv", "tv5", "eagle", "sbn", "tv9", "sportbox", "etv", "mongolhd", "royal", "mnc", "ehoron", "bloomberg", "parliament"];
+Univision.CHANNEL_IDS = [1, 24, 23, 3, 22, 4, 26, 25, 27, 31, 5, 2, 38, 39, 9, 41, 42];
+Univision.CHANNEL_NAMES = ["mnb", "mnb_2", "edu", "ubs", "mn25", "ntv", "tv5", "eagle", "sbn", "tv9", "etv", "mongolhd", "royal", "mnc", "ehoron", "bloomberg", "parliament"];
 
-Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER = [1, 17, 0, 4, 3, 7, 5, 11, 2, 6, 8, 9, 15, 16, 12, 10, 13, 14];
-Univision.CURRENT_TV_SCHEDULE_NAMES = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-Univision.CURRENT_TV_SCHEDULE_TIMES = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER = [1, 16, 0, 4, 3, 7, 5, 10, 2, 6, 8, 9, 14, 15, 11, 12, 13];
+Univision.CURRENT_TV_SCHEDULE_NAMES = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+Univision.CURRENT_TV_SCHEDULE_TIMES = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+
+Univision.VERSION=99;
 
 Univision.currentChannelIndex = 0;
 Univision.sessionId = null;
@@ -40,7 +42,7 @@ Univision.getCurrentChannel = function() {
 		Univision.onSessionIdNotFound();
 		return null;
 	}
-	var url = 'http://202.70.32.50/hls/_definst_/tv_mid/smil:'
+	var url = 'http://202.70.45.36/hls/_definst_/tv_mid/smil:'
 								+ Univision.CHANNEL_NAMES[this.currentChannelIndex]
 								+ '.smil/playlist.m3u8?' + this.sessionId + '|BITRATES=' + Univision.AVAILABLE_BITRATES[this.currentBitrateIndex] + '|COMPONENT=HLS';
 	return { url: url, title: Univision.CHANNEL_NAMES[this.currentChannelIndex]};
@@ -63,37 +65,21 @@ Univision.logout = function() {
 
 Univision.login = function() {
 	$.ajax({
-		url: "https://my.univision.mn/index.php/login",
-		type: "get",
+		url: "http://my.univision.mn/user/loginformobile",
+		type: "post",
+		data: {
+			"username": Account.username,
+			"password": Account.password
+		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			var response = XMLHttpRequest.responseText;
-			alert(response);
-			var csrfTokenIndex = response.indexOf("_csrf_token");
-			if (csrfTokenIndex > 0) {
-				var csrfToken = response.substring(csrfTokenIndex + 21, csrfTokenIndex + 21 + 32);
-				$.ajax({
-					url: "https://my.univision.mn/index.php/login",
-					type: "post",
-					data: {
-						"signin[_csrf_token]": csrfToken,
-						"signin[username]": Account.username,
-						"signin[password]": Account.password,
-						"signin[remember]": 'true',
-						"submit": "Нэвтрэх"
-					},
-					error: function(XMLHttpRequest, textStatus, errorThrown) {
-						Univision.onLoginFailed();
-					},
-					success: function(data) {
-						Univision.onLoginSuccessful();
-					}
-				});
-			} else {
-				Univision.onLoginSuccessful();
-			}
+			Univision.onLoginFailed();
 		},
 		success: function(data) {
-			Univision.onLoginSuccessful();
+			if (data.indexOf("1") >= 0) {
+				Univision.onLoginSuccessful();
+			} else {
+				Univision.onLoginFailed();
+			}
 		}
 	});
 };
@@ -118,7 +104,7 @@ Univision.onLoginSuccessful = function() {
 	
 	// fetch session id
 	$.ajax({
-		url: "http://tv.univision.mn/24/watch",
+		url: "http://tv.univision.mn/tv/getStreamUrl?version="+Univision.VERSION+"&username="+Account.username+"&live=",
 		type: "get",
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			Univision.onSessionIdNotFound();
@@ -151,29 +137,24 @@ Univision.onSessionIdFound = function(sessionId) {
 
 Univision.fetchCurrentTvSchedule = function() {
 	$.ajax({
-		url: "http://tv.univision.mn/",
+		url: "http://tv.univision.mn/tv/xml?id=" + Account.username,
 		type: "get",
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			
 		},
 		success: function(data) {
-			var tvlist = $(data).find('ul.tvlist');
-			if (tvlist != null) {
-				var channelIndex = 0;
-	            tvlist.children().each(function() {
-	            	var liElement = $(this);
-	            	var scheduleHtmlText = liElement.find('div.schedule-now').html().trim().replace('<em>', '').replace('</em>', '');
-	            	if (scheduleHtmlText.indexOf('<br>') >= 0) {
-		            	var scheduleTime = scheduleHtmlText.split('<br>')[0];
-		            	var scheduleName = scheduleHtmlText.split('<br>')[1];
-		            	Univision.CURRENT_TV_SCHEDULE_TIMES[Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER[channelIndex]] = scheduleTime;
-		            	Univision.CURRENT_TV_SCHEDULE_NAMES[Univision.CURRENT_TV_SCHEDULE_CHANNEL_ORDER[channelIndex]] = scheduleName;
-	            	}
-	            	channelIndex++;
-	            });
-	            
-	            sf.scene.get('MainMenu').updateCurrentTvSchedule();
-			}
+			$(data).find("item").each(function() {
+				var channelId = parseInt($(this).find("id").text());
+				var schedule = $(this).find("schedule").text();
+				var splitIndex = schedule.lastIndexOf(":");
+				var scheduleTime = schedule.substring(0, splitIndex);
+				var scheduleName = schedule.substring(splitIndex+1);
+				
+				var channelIndex = Univision.CHANNEL_IDS.indexOf(channelId);
+				Univision.CURRENT_TV_SCHEDULE_TIMES[channelIndex] = scheduleTime;
+				Univision.CURRENT_TV_SCHEDULE_NAMES[channelIndex] = scheduleName;
+			});
+			sf.scene.get('MainMenu').updateCurrentTvSchedule();
 		}
 	});
 };
